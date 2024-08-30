@@ -241,10 +241,14 @@ body {
 
 @media (max-width: 380px) {
   .cards_wrap {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
+    max-width: 268px;
+    display: grid;
+    margin: 0 auto;
+    grid-template-columns: 1fr 1fr;
     gap: 14px;
+  }
+
+  .card_item {
+    margin: 0 auto;
   }
 }

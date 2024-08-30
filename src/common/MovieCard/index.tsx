@@ -21,10 +21,10 @@ const MovieCard = ({
     <>
       <Link
         to={`/${category}/${id}`}
-        className="dark:bg-[#1f1f1f] bg-[#f5f5f5] rounded-lg relative group w-[170px] select-none xs:h-[220px] h-[216px] overflow-hidden"
+        className="dark:bg-[#1f1f1f] bg-[#f5f5f5] rounded-lg relative group xs:max-w-[170px] max-w-[130px] min-w-[130px] select-none xs:h-[220px] h-[170px] overflow-hidden"
       >
         <Image
-          height={!isMobile ? 250 : 216}
+          height={!isMobile ? 250 : 170}
           width={170}
           src={`${poster_path}`}
           alt={original_title}
@@ -32,7 +32,7 @@ const MovieCard = ({
           effect="zoomIn"
         />
 
-        <div className="absolute top-0 left-0 w-[170px]  h-full group-hover:opacity-100 opacity-0 bg-[rgba(0,0,0,0.6)] transition-all duration-300 rounded-lg flex items-center justify-center">
+        <div className="absolute top-0 left-0 w-[100%] min-w-[130px] h-full group-hover:opacity-100 opacity-0 bg-[rgba(0,0,0,0.6)] transition-all duration-300 rounded-lg flex items-center justify-center">
           <div className="xs:text-[48px] text-[42px] text-[#ff0000] scale-[0.4] group-hover:scale-100 transition-all duration-300 ">
             <FaYoutube />
           </div>

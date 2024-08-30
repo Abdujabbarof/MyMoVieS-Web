@@ -61,7 +61,7 @@ const Catalog = () => {
             {shows?.map((movie) => (
               <div
                 key={movie.filmId}
-                className="flex flex-col xs:gap-4 gap-2 xs:max-w-[170px] max-w-[124px] min-w-[170px] rounded-lg lg:mb-6 md:mb-5 sm:mb-4 mb-[10px]"
+                className="card_item flex flex-col xs:gap-4 gap-2 xs:max-w-[170px] max-w-[130px] min-w-[124px] rounded-lg lg:mb-6 md:mb-5 sm:mb-4 mb-[10px]"
               >
                 <MovieCard movie={movie} category={String(category)} />
               </div>
@@ -88,6 +88,7 @@ const Catalog = () => {
             </button>
           </div>
         )}
+
       </section>
     </>
   );

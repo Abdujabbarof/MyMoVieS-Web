@@ -35,7 +35,7 @@ const FavCatalog = () => {
     <>
       <CatalogHeader category="favourites" />
       
-      <section className={`${smallMaxWidth}`}>
+      <section className={`${smallMaxWidth} pb-5 min-h-[100vh]`}>
       <form
         className="text-[14px] lg:py-10 md:pt-9 md:pb-10 sm:pt-8 sm:pb-10  pt-6 pb-8 flex flex-row items-center justify-center"
         onSubmit={handleSubmit}
@@ -55,13 +55,13 @@ const FavCatalog = () => {
         </button>
       </form>
 
-        { likedItems.length < 1 ? <h1>No favourites</h1> :<div
+        { likedItems.length < 1 ? <h1 className="text-center pt-[200px] text-white font-medium">No favourites</h1> :<div
           className="cards_wrap"
         >
           {data.map((movie) => (
             <div
                 key={movie.filmId}
-                className="flex flex-col xs:gap-4 gap-2 xs:max-w-[170px] max-w-[124px] min-w-[170px] rounded-lg lg:mb-6 md:mb-5 sm:mb-4 mb-[10px]"
+                className="card_item flex flex-col xs:gap-4 gap-2 xs:max-w-[170px] max-w-[130px] min-w-[124px] rounded-lg lg:mb-6 md:mb-5 sm:mb-4 mb-[10px]"
               >
                 <MovieCard movie={movie} category={String(category)} />
               </div>
