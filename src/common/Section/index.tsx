@@ -64,7 +64,7 @@ const Section: FC<SectionProps> = ({
     `sm:py-1 py-[2px] sm:text-[14px] xs:text-[12.75px] text-[12px] sm:px-4 px-3 rounded-full  dark:text-gray-300 hover:-translate-y-1 transition-all duration-300`,
     theme === "Dark" ? "view-all-btn--dark" : "view-all-btn--light"
   );
-  
+
   return (
     <section className={sectionStyle} ref={ref}>
       <div className="flex flex-row justify-between items-center mb-[22.75px]">
@@ -78,7 +78,7 @@ const Section: FC<SectionProps> = ({
           </Link>
         )}
       </div>
-      
+
       <div className="sm:h-[312px] xs:h-[309px] h-[266px]">
         {isLoading ? (
           <SkelatonLoader />
@@ -86,7 +86,8 @@ const Section: FC<SectionProps> = ({
           <Error error={String(errorMessage)} className="h-full text-[18px]" />
         ) : (
           <MoviesSlides
-            movies={data?.films?.filter((film: IMovie) => film?.filmId !== id).slice(0, 10)}
+            key={data?.kinopoiskId}
+            movies={data?.films?.filter((film: IMovie) => film?.kinopoiskId !== id).slice(0, 10)}
             category={category}
           />
         )}

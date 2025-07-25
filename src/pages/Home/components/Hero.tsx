@@ -15,10 +15,10 @@ const Hero = ({ movies }: { movies: IMovie[] }) => (
     }}
     modules={[Autoplay]}
   >
-    {movies.map((movie) => {
+    {movies?.map((movie) => {
       return (
         <SwiperSlide
-          key={movie.filmId}
+          key={movie.kinopoiskId}
           style={{
             backgroundImage: `
               linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0.5)),url('${movie.posterUrl}'`,

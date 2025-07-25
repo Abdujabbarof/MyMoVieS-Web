@@ -52,9 +52,9 @@ const GlobalContextProvider = ({ children }: Props) => {
 
   const toggleLikeItem = (movie: IMovie) => {
     setLikedItems((prevLikedItems) => {
-      if (likedItems.some((likedItem) => likedItem.filmId === movie.filmId)) {
-        localStorage.setItem("likedItems", JSON.stringify(prevLikedItems.filter((item) => item.filmId !== movie.filmId)))
-        return prevLikedItems.filter((item) => item.filmId !== movie.filmId);
+      if (likedItems.some((likedItem) => likedItem.kinopoiskId === movie.kinopoiskId)) {
+        localStorage.setItem("likedItems", JSON.stringify(prevLikedItems.filter((item) => item.kinopoiskId !== movie.kinopoiskId)))
+        return prevLikedItems.filter((item) => item.kinopoiskId !== movie.kinopoiskId);
       } else {
         localStorage.setItem("likedItems", JSON.stringify([...prevLikedItems, movie]))
         return [...prevLikedItems, movie];

@@ -11,10 +11,10 @@ interface MoviesSlidesProps {
 
 const MoviesSlides: FC<MoviesSlidesProps> = ({ movies, category }) => (
   <Swiper slidesPerView="auto" spaceBetween={15} className="mySwiper">
-    {movies?.map((movie) => {
+    {movies?.map((movie, index) => {
       return (
         <SwiperSlide
-          key={movie.filmId}
+          key={movie?.kinopoiskId + String(index)}
           className="flex mt-1 flex-col xs:gap-[14px] gap-2 max-w-[170px]  rounded-lg"
         >
           <MovieCard movie={movie} category={category} />

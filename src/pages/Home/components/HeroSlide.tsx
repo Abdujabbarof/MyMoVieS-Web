@@ -18,14 +18,11 @@ const HeroSlide = ({ movie }: { movie: IMovie }) => {
   const {
     nameEn,
     nameRu,
+    nameOriginal,
     posterUrl: posterPath,
-    filmId: id,
+    kinopoiskId: id,
   } = movie;
 
-  // const showTrailer = () => {
-  //   getTrailerId(id);
-  //   setIsModalOpen(true);
-  // };
 
   const handleWatchNow = () => {
     navigate(`/movie/${id}`);
@@ -52,7 +49,7 @@ const HeroSlide = ({ movie }: { movie: IMovie }) => {
         className="text-gray-300 sm:max-w-[80vw] max-w-[90vw]  md:max-w-[420px] font-nunito flex flex-col sm:gap-5 xs:gap-3 gap-[10px] sm:mb-8"
       >
         <m.h2 variants={fadeDown} className={cn(mainHeading)}>
-          {nameEn ?? nameRu}
+          {nameEn ?? nameRu ?? nameOriginal}
         </m.h2>
         {/* <m.p variants={fadeDown} className={paragraph}>
           {overview.length > 180 ? `${overview.substring(0, 180)}...` : overview}
@@ -84,7 +81,7 @@ const HeroSlide = ({ movie }: { movie: IMovie }) => {
         </m.div>
       </m.div>
 
-      <Poster title={nameEn ?? nameRu} posterPath={posterPath} className="mr-auto" />
+      <Poster title={nameEn ?? nameRu ?? nameOriginal} posterPath={posterPath} className="mr-auto" />
     </div>
   );
 };

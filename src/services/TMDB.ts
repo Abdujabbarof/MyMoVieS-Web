@@ -37,7 +37,7 @@ export const tmdbApi = createApi({
           return `${API_URL_SEARCH}${category?.replaceAll("-", " ").replaceAll(":", "").split(" ").splice(0, 2).join(" ")}`;
         }
 
-        let url = `top?type=${type}&page=${page}`
+        let url = `?type=${type}&page=${page}`
         return url;
       },
     }),

@@ -6,9 +6,11 @@ import { useGetShowsQuery } from "@/services/TMDB";
 const Home = () => {
   const { data, isLoading, isError } = useGetShowsQuery({
     category: "movie",
-    type: "TOP_100_POPULAR_FILMS",
+    type: "FILM",
     page: 1,
   });
+
+  console.log(data);
 
   if (isLoading) {
     return <Loader />;
@@ -18,8 +20,8 @@ const Home = () => {
     return <Error error="Unable to fetch the movies! " />;
   }
 
-  const popularMovies = data?.films;
-  
+  const popularMovies = data?.items;
+
   return (
     <>
       <Hero movies={popularMovies} />

@@ -31,6 +31,7 @@ export interface Movie {
   isTicketsAvailable: boolean;
   kinopoiskHDId: number | null;
   kinopoiskId: number;
+  filmId?: number;
   lastSync: string;
   logoUrl: string | null;
   nameEn: string | null;
@@ -67,16 +68,19 @@ export interface Movie {
 
 export interface IMovie {
   countries: Country[];
-  filmId: number;
+  kinopoiskId: number;
+  filmId?: string;
   filmLength: string;
   genres: Genre[];
   isAfisha: number;
+  nameOriginal: string;
   isRatingUp: boolean | null;
   nameEn: string;
   nameRu: string;
   posterUrl: string;
   posterUrlPreview: string;
   rating: null | number;
+  ratingImdb: null | number;
   ratingChange: number | null;
   ratingVoteCount: number;
   year: string;

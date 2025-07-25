@@ -13,10 +13,11 @@ const MovieCard = ({
   movie: IMovie;
   category: string;
 }) => {
-  const { posterUrl: poster_path, nameEn: original_title, nameRu, nameEn, filmId: id, rating } = movie;
+  const { posterUrl: poster_path, nameEn: original_title, nameRu, nameEn, nameOriginal, kinopoiskId, filmId, rating, ratingImdb } = movie;
+  const id = kinopoiskId || filmId
   const isMobile = useMediaQuery("(max-width: 380px)");
   const { likedItems, toggleLikeItem } = useGlobalContext()
-  
+
   return (
     <>
       <Link
@@ -38,18 +39,18 @@ const MovieCard = ({
           </div>
         </div>
 
-        {(rating && rating > 1) && <button className={`w-[30px] h-[30px] text-[15px] font-medium rounded-full bg-[#191624] absolute left-1 top-1 flex justify-center items-center ${rating < 7 ? "text-[orange]" : "text-[#7eff7e]"} rotate-[-25deg]`}>
-          {rating}
-        </button> }
+        {((rating && rating > 1) || (ratingImdb && ratingImdb > 1)) && <button className={`w-[30px] h-[30px] text-[15px] font-medium rounded-full bg-[#191624] absolute left-1 top-1 flex justify-center items-center ${rating ?? ratingImdb! < 7 ? "text-[orange]" : "text-[#7eff7e]"} rotate-[-25deg]`}>
+          {rating ?? ratingImdb}
+        </button>}
       </Link>
 
       <div className="flex justify-between gap-2 items-start">
         <h4 className="dark:text-gray-300 text-start flex justify-between items-start cursor-default sm:text-base xs:text-[14.75px] text-[14px] font-medium truncate">
-          {original_title ?? nameEn ?? nameRu}
+          {original_title ?? nameEn ?? nameRu ?? nameOriginal}
         </h4>
 
         <button className="h-[30px] rounded-full" onClick={() => toggleLikeItem(movie)}>
-          {   likedItems.some((likedItem) => likedItem.filmId === movie.filmId)  ?  <FaHeart className="text-[#ff0000] text-[18px]" /> : <FaRegHeart className="text-[white] text-[18px]"  />  }
+          {likedItems.some((likedItem) => likedItem.kinopoiskId === movie.kinopoiskId) ? <FaHeart className="text-[#ff0000] text-[18px]" /> : <FaRegHeart className="text-[white] text-[18px]" />}
         </button>
       </div>
 

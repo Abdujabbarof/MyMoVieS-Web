@@ -15,16 +15,16 @@ const Catalog = () => {
   const [query, setQuery] = useSearchParams();
   const { category } = useParams();
 
-  const type = query.get("type") || "TOP_100_POPULAR_FILMS";
+  const type = query.get("type") || "FILM";
   const searchQuery = query.get("search") || "";
 
-  const { data, isLoading, isFetching } = useGetShowsQuery({
+  const { data, isLoading, isFetching, isError } = useGetShowsQuery({
     category,
     page,
     searchQuery,
     type,
   });
-  
+
 
   useEffect(() => {
     setPage(1);
@@ -34,33 +34,36 @@ const Catalog = () => {
   useEffect(() => {
     if (isLoading || isFetching) return;
 
-    if (data?.films) {
+    const resultItems = data?.items || data?.films || [];
+
+    if (resultItems.length > 0) {
       if (page > 1) {
-        setShows((prev) => [...prev, ...data?.films]);
+        setShows((prev) => [...prev, ...resultItems]);
       } else {
-        setShows([...data?.films]);
+        setShows([...resultItems]);
         setIsCategoryChanged(false);
       }
     }
-  }, [data, isFetching, isLoading, page]);  
+  }, [data, isFetching, isLoading, page]);
+  
   
 
   return (
     <>
       <CatalogHeader category={String(category)} />
-      <section className={`${smallMaxWidth}`}>
-        <Search setQuery={setQuery}/>
+      <section className={`${smallMaxWidth} min-h-screen`}>
+        <Search setQuery={setQuery} />
 
         {isLoading || isCategoryChanged ? (
           <SkelatonLoader isMoviesSliderLoader={false} />
         ) : (
           <div
-          
+
             className="cards_wrap"
           >
             {shows?.map((movie) => (
               <div
-                key={movie.filmId}
+                key={movie.kinopoiskId}
                 className="card_item flex flex-col xs:gap-4 gap-2 xs:max-w-[170px] max-w-[130px] min-w-[124px] rounded-lg lg:mb-6 md:mb-5 sm:mb-4 mb-[10px]"
               >
                 <MovieCard movie={movie} category={String(category)} />
