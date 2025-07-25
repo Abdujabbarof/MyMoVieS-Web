@@ -12,7 +12,7 @@ const context = React.createContext({
   setShowSidebar: (prevValue: boolean) => { },
   setIsModalOpen: (value: boolean) => { },
   likedItems: [] as IMovie[],
-  toggleLikeItem: (movie: IMovie) => {},
+  toggleLikeItem: (movie: IMovie) => { },
 });
 
 interface Props {
@@ -38,10 +38,10 @@ const GlobalContextProvider = ({ children }: Props) => {
     try {
       const res = await fetch(TMDB_API_BASE_URL + id, {
         headers: {
-            "Content-Type": "application/json",
-            "X-API-KEY": API_KEY,
+          "Content-Type": "application/json",
+          "X-API-KEY": API_KEY,
         },
-    });
+      });
 
       const data = await res.json();
       setVideoId(data.results[0].key);
@@ -50,15 +50,37 @@ const GlobalContextProvider = ({ children }: Props) => {
     }
   };
 
+  // const toggleLikeItem = (movie: IMovie) => {
+  //   setLikedItems((prevLikedItems) => {
+  //     if (likedItems.some((likedItem) => likedItem.kinopoiskId === movie.kinopoiskId)) {
+  //       localStorage.setItem("likedItems", JSON.stringify(prevLikedItems.filter((item) => item.kinopoiskId !== movie.kinopoiskId)))
+  //       return prevLikedItems.filter((item) => item.kinopoiskId !== movie.kinopoiskId);
+  //     } else {
+  //       localStorage.setItem("likedItems", JSON.stringify([...prevLikedItems, movie]))
+  //       return [...prevLikedItems, movie];
+  //     }
+  //   });
+  // };
+
   const toggleLikeItem = (movie: IMovie) => {
+    const movieId = movie.kinopoiskId || movie.filmId;
+
     setLikedItems((prevLikedItems) => {
-      if (likedItems.some((likedItem) => likedItem.kinopoiskId === movie.kinopoiskId)) {
-        localStorage.setItem("likedItems", JSON.stringify(prevLikedItems.filter((item) => item.kinopoiskId !== movie.kinopoiskId)))
-        return prevLikedItems.filter((item) => item.kinopoiskId !== movie.kinopoiskId);
+      const isAlreadyLiked = prevLikedItems.some(
+        (item) => (item.kinopoiskId || item.filmId) === movieId
+      );
+
+      let updatedItems;
+      if (isAlreadyLiked) {
+        updatedItems = prevLikedItems.filter(
+          (item) => (item.kinopoiskId || item.filmId) !== movieId
+        );
       } else {
-        localStorage.setItem("likedItems", JSON.stringify([...prevLikedItems, movie]))
-        return [...prevLikedItems, movie];
+        updatedItems = [...prevLikedItems, movie];
       }
+
+      localStorage.setItem("likedItems", JSON.stringify(updatedItems));
+      return updatedItems;
     });
   };
 

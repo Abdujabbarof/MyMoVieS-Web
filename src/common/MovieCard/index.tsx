@@ -18,6 +18,10 @@ const MovieCard = ({
   const isMobile = useMediaQuery("(max-width: 380px)");
   const { likedItems, toggleLikeItem } = useGlobalContext()
 
+  const isLiked = likedItems.some(
+    (likedItem) => (likedItem.kinopoiskId || likedItem.filmId) === id
+  );
+
   return (
     <>
       <Link
@@ -50,7 +54,7 @@ const MovieCard = ({
         </h4>
 
         <button className="h-[30px] rounded-full" onClick={() => toggleLikeItem(movie)}>
-          {likedItems.some((likedItem) => likedItem.kinopoiskId === movie.kinopoiskId) ? <FaHeart className="text-[#ff0000] text-[18px]" /> : <FaRegHeart className="text-[white] text-[18px]" />}
+          {isLiked ? <FaHeart className="text-[#ff0000] text-[18px]" /> : <FaRegHeart className="text-[white] text-[18px]" />}
         </button>
       </div>
 
