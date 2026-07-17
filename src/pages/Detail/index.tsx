@@ -182,7 +182,7 @@ const Detail = () => {
               <a
                 target="_blank" 
                 rel="noreferrer"
-                href={movie?.webUrl?.replace("kino", "ss")}
+                href={movie?.webUrl?.replace("poisk", "kino").replace(".ru", ".vip")}
                 type="button"
                 className={cn(
                   watchBtn,
